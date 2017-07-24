@@ -13,11 +13,7 @@ import org.openqa.selenium.*;
 import com.sqa.ja.helpers.*;
 
 /**
- * Core //ADDD (description of class)
- * <p>
- * //ADDD (description of core fields)
- * <p>
- * //ADDD (description of core methods)
+ * Core - Base class for everything test
  *
  * @author Alvarez, Jason
  * @version 1.0.0
@@ -25,32 +21,67 @@ import com.sqa.ja.helpers.*;
  */
 public class Core {
 
+	/**
+	 * URL of website to test
+	 */
 	private String baseURL;
 
+	/**
+	 * Drivers available are FireFox, Chrome, and IE
+	 */
 	private WebDriver driver;
 
+	/**
+	 * Apache log4j, a logging library for Java
+	 */
 	private Logger log = Logger.getLogger(this.getClass());
 
+	/**
+	 * Appends to testingName to make screenshot filename unique
+	 */
 	private int screenshotCount = 1;
 
+	/**
+	 * Default screenshot name
+	 */
 	protected String testingName = "Auto Test";
 
+	/**
+	 * Initial setup and final teardown for any test
+	 */
 	private BasicTest relTest;
 
+	/**
+	 * Constructor with known {@link #driver} and {@link #baseURL} from
+	 * BasicTest instance
+	 *
+	 * @param test
+	 *            Uses {@link #driver} and {@link #baseURL} from BasicTest Class
+	 */
 	public Core(BasicTest test) {
 		this.baseURL = test.getBaseURL();
 		this.driver = test.getDriver();
 		this.relTest = test;
 	}
 
+	/**
+	 * Constructor with known baseURL and unknown WebDriver
+	 *
+	 * @param baseURL
+	 *            See {@link #baseURL}
+	 */
 	public Core(String baseURL) {
 		this.baseURL = baseURL;
 		this.driver = null;
 	}
 
 	/**
+	 * Constructor with known baseURL and driver
+	 *
 	 * @param baseURL
+	 *            See {@link #baseURL}
 	 * @param driver
+	 *            See {@link #driver}
 	 */
 	public Core(String baseURL, WebDriver driver) {
 		this.baseURL = baseURL;
@@ -58,39 +89,62 @@ public class Core {
 	}
 
 	/**
-	 * @return the baseURL
+	 * @return the {@link #baseURL}
 	 */
 	public String getBaseURL() {
 		return this.baseURL;
 	}
 
 	/**
-	 * @return the driver
+	 * @return the {@link #driver}
 	 */
 	public WebDriver getDriver() {
 		return this.driver;
 	}
 
+	/**
+	 * @return the {@link #log}
+	 */
 	public Logger getLog() {
 		return this.log;
 	}
 
+	/**
+	 * For a given property in config.properties, return the property's value.
+	 * Uses AutoBasics class getProp().
+	 *
+	 * @param propName
+	 *            One of the field names in src/main/resouces/config.properties
+	 * @return Value of property in src/main/resouces/config.properties
+	 */
 	public String getProp(String propName) {
 		return AutoBasics.getProp(propName, "src/main/resources/", "config.properties", getLog());
 	}
 
+	/**
+	 * Checks if a WebElement is present
+	 *
+	 * @param by
+	 * @return True if Web Element exists or False if Web Element is not present
+	 */
 	public boolean isPresent(By by) {
 		return AutoBasics.isElementPresent(getDriver(), by, getLog());
 	}
 
 	/**
-	 * @param driver
-	 *            the driver to set
+	 * @param {@link
+	 * 			#driver}
 	 */
 	public void setDriver(WebDriver driver) {
 		this.driver = driver;
 	}
 
+	/**
+	 * Saves a screenshot of the current webpage with the default name (See
+	 * {@link #testingName} and {@link #screenshotCount})
+	 *
+	 * @return True if screenshot successful and False if screenshot failed
+	 */
 	public boolean takeScreenshot() {
 		boolean tookScreenShot = AutoBasics.takeScreenshot("screenshots", this.testingName + this.screenshotCount,
 				getDriver(), getLog());
@@ -100,11 +154,20 @@ public class Core {
 		return tookScreenShot;
 	}
 
+	/**
+	 * Saves a screenshot of the current webpage
+	 *
+	 * @param fileName
+	 *            File name for screenshot
+	 * @return True if screenshot successful and False if screenshot failed
+	 */
 	public boolean takeScreenshot(String fileName) {
 		return AutoBasics.takeScreenshot("screenshots", fileName, getDriver(), getLog());
 	}
 
 	/**
+	 * A different format than regular toString()
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

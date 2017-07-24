@@ -1,5 +1,5 @@
 /**
- * File Name: BasicPaige.java<br>
+ * File Name: BasicPage.java<br>
  * Alvarez, Jason<br>
  * Java Boot Camp Exercise<br>
  * Instructor: Jean-francois Nepton<br>
@@ -7,16 +7,10 @@
  */
 package com.sqa.ja.auto;
 
-import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;
-import org.openqa.selenium.support.ui.*;
 
 /**
- * BasicPaige //ADDD (description of class)
- * <p>
- * //ADDD (description of core fields)
- * <p>
- * //ADDD (description of core methods)
+ * BasicPage - Foundation for Page Object Model
  *
  * @author Alvarez, Jason
  * @version 1.0.0
@@ -24,12 +18,14 @@ import org.openqa.selenium.support.ui.*;
  */
 public class BasicPage extends Core {
 
+	/**
+	 * Constructor to setup a basic page model
+	 *
+	 * @param test
+	 *            BasicTest instance
+	 */
 	public BasicPage(BasicTest test) {
 		super(test);
 		PageFactory.initElements(getDriver(), this);
-	}
-
-	public void selectDropDown(WebElement dropDown, String value) {
-		new Select(dropDown).selectByVisibleText(value);
 	}
 }

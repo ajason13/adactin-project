@@ -8,16 +8,29 @@ import org.openqa.selenium.ie.*;
 import org.openqa.selenium.remote.*;
 import org.testng.annotations.*;
 
+/**
+ * BasicTest - Initializes browers before each test class and setup/teardown
+ * before/after each test method
+ *
+ * @author Alvarez, Jason
+ * @version 1.0.0
+ * @since 1.0
+ */
 public class BasicTest extends Core {
 
 	/**
+	 * Constructor to initialize Core constructor
+	 *
 	 * @param baseURL
-	 * @param driver
+	 *            URL of the website
 	 */
 	public BasicTest(String baseUrl) {
 		super(baseUrl);
 	}
 
+	/**
+	 * Initiallize test class to use Chrome browswer
+	 */
 	@BeforeClass(enabled = false, groups = "chrome")
 	public void setUpChrome() {
 		System.out.println("Setup Chrome");
@@ -34,6 +47,9 @@ public class BasicTest extends Core {
 		getDriver().get(getBaseURL());
 	}
 
+	/**
+	 * Initiallize test class to use FireFox browswer
+	 */
 	@BeforeClass(enabled = true, groups = "firefox")
 	public void setUpFirefox() {
 		System.out.println("Setup Firefox");
@@ -48,6 +64,9 @@ public class BasicTest extends Core {
 		getDriver().get(getBaseURL());
 	}
 
+	/**
+	 * Initiallize test class to use IE browswer
+	 */
 	@BeforeClass(enabled = false, groups = "ie")
 	public void setUpIE() {
 		System.out.println("Setup IE");
@@ -65,12 +84,20 @@ public class BasicTest extends Core {
 		getDriver().manage().window().maximize();
 	}
 
+	/**
+	 * Runs before each test method
+	 */
 	@BeforeMethod()
 	public void setupTest() {
 		// Goto Base URL
 		getDriver().get(getBaseURL());
 	}
 
+	/**
+	 * Runs after each test method
+	 *
+	 * @throws Exception
+	 */
 	@AfterClass(alwaysRun = true)
 	public void tearDown() throws Exception {
 		// Quit all instances of the bowser

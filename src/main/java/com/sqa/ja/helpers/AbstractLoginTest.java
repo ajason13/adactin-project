@@ -12,11 +12,7 @@ import org.testng.annotations.*;
 import com.sqa.ja.auto.*;
 
 /**
- * AbstractLoginTest //ADDD (description of class)
- * <p>
- * //ADDD (description of core fields)
- * <p>
- * //ADDD (description of core methods)
+ * AbstractLoginTest - Abstract class for testing login and logout
  *
  * @author Alvarez, Jason
  * @version 1.0.0
@@ -25,21 +21,39 @@ import com.sqa.ja.auto.*;
 public abstract class AbstractLoginTest extends BasicTest {
 
 	/**
+	 * Constructor for passing URL to test to BasicTest
+	 *
 	 * @param baseUrl
+	 *            Website to test
 	 */
 	public AbstractLoginTest(String baseUrl) {
 		super(baseUrl);
 	}
 
+	/**
+	 * Login function
+	 *
+	 * @param username
+	 * @param password
+	 */
 	abstract public void login(String username, String password);
 
+	/**
+	 * Logout function
+	 */
 	abstract public void logout();
 
+	/**
+	 * Before any tests, grab username and password from a config file to login
+	 */
 	@BeforeClass
 	public void setupLogin() {
 		login(getProp("username"), getProp("password"));
 	}
 
+	/**
+	 * After all the tests, logout
+	 */
 	@AfterClass
 	public void setupLogout() {
 		logout();
