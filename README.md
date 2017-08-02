@@ -1,7 +1,6 @@
-# Basic Project
-## Basic Project Structure
+# Adactin Project
 
-*Default Structure for A Basic Project*
+*Creating some test cases for Adactin's Hotel App*
 
 **Java 8**
 
